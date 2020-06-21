@@ -10,7 +10,13 @@ textarea{
   resize: none;
   color: #000000;
   border-left: 1px solid black;
-  padding: 10px;
+  padding: 25px;
+  margin: auto;
+}
+
+p{
+  margin-top: auto;
+  text-align: center;
 }
 
 .jumbotron {
@@ -26,6 +32,7 @@ textarea{
 }
 
 .description{
+  padding: 25px;
   white-space: pre-wrap;
 }
 
@@ -44,6 +51,7 @@ textarea{
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  padding: 30px;
 }
 
 .past {
@@ -68,9 +76,18 @@ textarea{
   background-color: #06AED5;
   color: white;
   text-align: center;
+  background-size: auto;
+  margin-top:auto;
+  margin-left:0px;
+  padding: 30px 30px 30px 30px;
 }
 
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+.col-1 {
+  padding-left: 0px !important; 
+  padding-right: 0px !important; 
 }
