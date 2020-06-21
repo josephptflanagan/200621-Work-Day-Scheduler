@@ -5,7 +5,12 @@ $("#currentDay").text(moment().format('dddd MMMM Do'));
 
 //update color of the timeblocks based on time of day
 var colorUpdater = function(time){
-    var hour = parseInt((time.split(":"))[0]) + 3;
+    var hour = parseInt((time.split(":"))[0]-9);
+    
+    if(time.split(" ")[1] == "PM"){
+        hour +=12
+    }
+
     for(var i = 0; i<hours.length;i++){
         var currentTask =  $("#task-"+i).parent();
        if(i < hour){

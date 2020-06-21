@@ -12,7 +12,7 @@ https://github.com/josephptflanagan/200621-Work-Day-Scheduler/blob/master/assets
 ### Details
 I started by creating the dynamically updated day of the week at the top of the page, and decided that I wanted to include the time as well, so I added a clock that keeps time.
 
-I chose to dynamically generate the time blocks after seeing how much repeated code would be involved in creating the elements with HTML. 
+I chose to dynamically generate the time blocks after seeing how much repeated code would be involved in both creating, and editing, the elements with HTML. 
 
 I Generated the time blocks and with the contents intially held within a p element as I believe they look better than textareas, but when the text element is clicked on the p element converts into a textarea for editing, turning back into a p element when clicking off the text. 
 
