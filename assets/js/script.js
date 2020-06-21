@@ -1,9 +1,9 @@
-var tasks = {};
+//array to hold the hour titles of each timeblock
 var hours=["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
-
+//sets the day of the week at the top of the page
 $("#currentDay").text(moment().format('dddd MMMM Do'));
 
-
+//update color of the timeblocks based on time of day
 var colorUpdater = function(time){
     var hour = parseInt((time.split(":"))[0]) + 3;
     for(var i = 0; i<hours.length;i++){
@@ -23,10 +23,10 @@ var colorUpdater = function(time){
         currentTask.removeClass("present")
         currentTask.addClass("future")
        } 
-       
     }
 };
 
+//time managing function
 setInterval(function(){
     //Local Time
     var time = moment().format('LT');
@@ -48,8 +48,7 @@ var createTimeBlocks = function(){
         //create task
         var task = $("<p>")
             .addClass("description")
-            .attr("id", "task-" + i)
-            .text("Test Task");    
+            .attr("id", "task-" + i);    
 
         var taskBox = $("<div>")
             .addClass('col-10 textarea past')           
@@ -57,7 +56,7 @@ var createTimeBlocks = function(){
 
         //create save button
         var buttonLogo = $("<span>")
-            .addClass("oi oi-lock-unlocked")
+            .addClass("oi oi-box")
 
         var button = $("<button>")
             .addClass("saveBtn")
@@ -76,20 +75,59 @@ var createTimeBlocks = function(){
             //append row to container
         $("#timeBlockHolder").append(row);
 
-        //check localStorage for data
         //if localStorage exists, populate task
+        var loadTasks = function(id){
+            var task = JSON.parse(localStorage.getItem("save-"+id));
+
+            if (task != null){
+                $("#task-"+i).text(task);
+            }
+        }
+
+        //check localStorage for data
+        loadTasks(i);
+       
     }
+    //Changes the native p to a textarea
+    $(".textarea").on("click", "p", function(){
+        console.log("text area clicked");
+        var text = $(this)
+            .text()
+            .trim();
+    
+        var textInput = $("<textarea>")
+            .addClass("form-control")
+            .val(text);
+        
+        $(this).replaceWith(textInput);
+    
+        textInput.trigger("focus");
+
+        //changes the textarea back to a p when done editing
+        $(".textarea").on("blur", "textarea", function(){
+            var text = $(this)
+                .val()
+                .trim();
+    
+            var taskP = $("<p>")
+            .addClass("description")
+            .text(text);
+    
+            $(this).replaceWith(taskP);
+        });
+    })
+
+    //saves the content of each timeblock
     $(".saveBtn").on("click", function(){
-        console.log("save button clicked");
-        //console.log(this);
-        //console.log($(this).parent());
-        var text = $(this).parent().siblings().attr("id", "task-");
+
+        var text = $(this).parent().siblings(".textarea").text();
         var time = $(this).parent().attr("id");
-        console.log(text);
-        console.log(time);
-        localStorage.setItem(time, text);
+
+        localStorage.setItem(time, JSON.stringify(text));
     });
 }
+
+
 
 createTimeBlocks();
 
